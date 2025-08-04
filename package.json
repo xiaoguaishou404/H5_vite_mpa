@@ -9,6 +9,11 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:separate": "node scripts/build-separate.js",
+    "build:single": "node scripts/build-single.js",
+    "build:main": "VITE_BUILD_ENTRY=main vite build",
+    "build:home": "VITE_BUILD_ENTRY=home vite build",
+    "build:contact": "VITE_BUILD_ENTRY=contact vite build",
     "preview": "vite preview"
   },
   "dependencies": {
