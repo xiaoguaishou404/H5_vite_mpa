@@ -4,7 +4,7 @@
     <img
       src="@/assets/user-level/light-effect-overlay.png"
       alt=""
-      class="light-effect-overlay"
+      class="light-effect-overlay-img"
     />
 
     <div class="wealth_level_page_content">
@@ -130,11 +130,11 @@ onUnmounted(() => {
 
 <style scoped>
 .wealth_level_page {
+  height: 100%;
   position: relative;
-  width: 100%;
-  background-color: #17130d;
+  color: #fff;
 
-  .light-effect-overlay {
+  .light-effect-overlay-img {
     position: absolute;
     top: 0;
     left: 0;
@@ -142,17 +142,13 @@ onUnmounted(() => {
     height: 580px;
   }
   .wealth_level_page_content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
     height: 100%;
+    position: relative;
     display: flex;
     flex-direction: column;
-    color: #fff;
+
     .header_container {
       flex-shrink: 0;
-      height: 100px;
       align-items: flex-end;
       background-color: transparent;
       transition: box-shadow 0.3s ease;
@@ -173,37 +169,29 @@ onUnmounted(() => {
       }
     }
     .scroll_container {
+      flex-grow: 1;
+      overflow: auto;
       position: relative;
-      width: 100%;
       padding: 0 20px;
 
       .observer-target {
-        height: 1px;
-        width: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
+        height: 0px;
         pointer-events: none;
       }
-
+      /* 卡片模块后面应该使用zoom适配，但是这里没有使用 */
       .card_container {
         position: relative;
-        width: 100%;
         .bg_img {
           width: 100%;
         }
         .card_content_container {
           position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          padding: 70px 40px;
-          height: 100%;
-          display: flex;
-          flex-direction: column;
+          top: 50%;
+          left: 33%;
+          transform: translate(-50%, -50%);
           .text_container {
-            font-size: 16px;
-            margin-top: 50px;
+            white-space: nowrap;
+            font-size: clamp(14px, 4vw, 20px);
           }
 
           .progress_container {

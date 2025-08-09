@@ -9,10 +9,13 @@
 
 body {
   line-height: 1;
+  font-size: var(--fontSize);
+  transition:
+    color 0.5s,
+    background-color 0.5s;
+  
 }
 
-#app {
-  width: clamp(375px, 100%, 500px);
-  min-height: 100vh;
-  margin: 0 auto;
-}
+
+
+
