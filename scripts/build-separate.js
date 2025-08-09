@@ -2,10 +2,10 @@
 
 import { execSync } from 'child_process'
 import { rmSync, existsSync } from 'fs'
-import { resolve } from 'path'
+import { entries } from '../config/entries.js'
 
-// 定义所有入口点（与vite.config.js保持一致）
-const entries = ['main', 'home', 'contact']
+// 获取所有入口点名称
+const entryNames = Object.keys(entries)
 
 console.log('🚀 开始独立构建各个入口点...\n')
 
@@ -16,14 +16,14 @@ if (existsSync('dist')) {
 }
 
 // 构建每个入口点
-for (const entry of entries) {
+for (const entry of entryNames) {
   console.log(`📦 正在构建入口点: ${entry}`)
   
   try {
     // 设置环境变量并执行构建
     const env = { ...process.env, VITE_BUILD_ENTRY: entry }
     
-    execSync('vite build', {
+    execSync('vite build --config vite.config.separate.js', {
       stdio: 'inherit',
       env: env,
       cwd: process.cwd()
@@ -38,7 +38,7 @@ for (const entry of entries) {
 
 console.log('🎉 所有入口点构建完成！')
 console.log('\n📁 构建结果:')
-entries.forEach(entry => {
+entryNames.forEach(entry => {
   console.log(`   dist/${entry}/ - ${entry} 页面独立包`)
 })
 
