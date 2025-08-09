@@ -1,13 +1,13 @@
 <template>
   <ModalsContainer />
-  <div class="wealth_level_page">
+  <div class="user_level_page">
     <img
       src="@/assets/user-level/light-effect-overlay.png"
       alt=""
       class="light-effect-overlay-img"
     />
 
-    <div class="wealth_level_page_content">
+    <div class="page-content">
       <Header class="header_container" :class="{ 'has-shadow': showHeaderShadow }">
         <template #header-left>
           <img src="@/assets/left-arrow.png" alt="返回" class="back-arrow" />
@@ -29,35 +29,31 @@
         <div class="card_container">
           <img src="@/assets/user-level/user-level-card-bg.png" alt="" class="bg_img" />
           <!-- 容器区域 -->
-          <div class="card_content_container">
+          <div class="card-content">
             <!-- 文字 -->
             <div class="text_container">还需要1200点财富值升级</div>
             <!-- 进度条容器 -->
             <div class="progress_container"></div>
           </div>
         </div>
-        <div class="level_progress_container">
+        <div class="progress-container">
           <!-- 背景图 -->
           <img src="@/assets/user-level/user-level-progress-bg.png" alt="" class="bg_img" />
           <!-- 进度条区域 -->
-          <div class="level_progress_content"></div>
+          <div class="progress-content"></div>
         </div>
-        <div class="level_introduction_container">
-          <div class="level_introduction_content_title">
+        <div class="level-intro">
+          <div class="intro-title">
             <div>等级特权</div>
           </div>
 
           <!-- 特权列表 -->
-          <div class="level_introduction_content_list">
-            <div class="level_introduction_content_list_item" v-for="item in 6" :key="item">
+          <div class="intro-list">
+            <div class="intro-item" v-for="item in 6" :key="item">
               <div>LV6 等级特权</div>
               <!-- 礼品列表 -->
-              <div class="level_introduction_content_list_item_gift_list">
-                <div
-                  class="level_introduction_content_list_item_gift_list_item"
-                  v-for="gift in 3"
-                  :key="gift"
-                ></div>
+              <div class="gift-list">
+                <div class="gift-item" v-for="gift in 3" :key="gift"></div>
               </div>
             </div>
           </div>
@@ -114,7 +110,7 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.wealth_level_page {
+.user_level_page {
   height: 100%;
   position: relative;
   color: #fff;
@@ -126,11 +122,12 @@ onUnmounted(() => {
     width: 100%;
     height: 580px;
   }
-  .wealth_level_page_content {
+  .page-content {
     height: 100%;
     position: relative;
     display: flex;
     flex-direction: column;
+    gap: 10px;
 
     .header_container {
       flex-shrink: 0;
@@ -169,7 +166,7 @@ onUnmounted(() => {
         .bg_img {
           width: 100%;
         }
-        .card_content_container {
+        .card-content {
           position: absolute;
           top: 50%;
           left: 33%;
@@ -178,19 +175,16 @@ onUnmounted(() => {
             white-space: nowrap;
             font-size: clamp(14px, 4vw, 20px);
           }
-
-          .progress_container {
-          }
         }
       }
 
-      .level_progress_container {
+      .progress-container {
         position: relative;
         .bg_img {
           width: 100%;
         }
       }
-      .level_introduction_container {
+      .level-intro {
         border: 2px solid #2a231a;
         padding: 20px;
         border-radius: 20px;
@@ -199,23 +193,23 @@ onUnmounted(() => {
           rgba(88, 55, 38, 0.0001) -0.56%,
           rgba(71, 55, 40, 0.597957) 98.43%
         );
-        .level_introduction_content_title {
+        .intro-title {
           font-size: clamp(20px, 4vw, 24px);
           text-align: center;
         }
-        .level_introduction_content_list {
+        .intro-list {
           display: flex;
           flex-direction: column;
           gap: 20px;
-          .level_introduction_content_list_item {
+          .intro-item {
             display: flex;
             flex-direction: column;
             gap: 10px;
-            .level_introduction_content_list_item_gift_list {
+            .gift-list {
               display: grid;
               grid-template-columns: repeat(3, 1fr);
               gap: 20px;
-              .level_introduction_content_list_item_gift_list_item {
+              .gift-item {
                 width: 100%;
                 aspect-ratio: 1/1;
                 border-radius: 20px;
