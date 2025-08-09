@@ -8,12 +8,10 @@ const rootDir = resolve(__dirname, '..')
 export const entries = {
   'logout-account': {
     input: resolve(rootDir, 'logout-account.html'),
-    name: 'logout-account'
+    name: 'logout-account',
   },
   'user-level': {
     input: resolve(rootDir, 'user-level.html'),
-    name: 'user-level'
-  }
+    name: 'user-level',
+  },
 }
-
-

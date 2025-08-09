@@ -18,17 +18,17 @@ if (existsSync('dist')) {
 // 构建每个入口点
 for (const entry of entryNames) {
   console.log(`📦 正在构建入口点: ${entry}`)
-  
+
   try {
     // 设置环境变量并执行构建
     const env = { ...process.env, VITE_BUILD_ENTRY: entry }
-    
+
     execSync('vite build --config vite.config.separate.js', {
       stdio: 'inherit',
       env: env,
-      cwd: process.cwd()
+      cwd: process.cwd(),
     })
-    
+
     console.log(`✅ ${entry} 构建完成 -> dist/${entry}/\n`)
   } catch (error) {
     console.error(`❌ ${entry} 构建失败:`, error.message)
@@ -38,7 +38,7 @@ for (const entry of entryNames) {
 
 console.log('🎉 所有入口点构建完成！')
 console.log('\n📁 构建结果:')
-entryNames.forEach(entry => {
+entryNames.forEach((entry) => {
   console.log(`   dist/${entry}/ - ${entry} 页面独立包`)
 })
 

@@ -5,7 +5,7 @@
 </template>
 
 <style scoped>
-.rounded-button{
+.rounded-button {
   width: 100%;
   height: 100%;
   border-radius: calc(infinity * 1px);

@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { VueFinalModal } from "vue-final-modal";
+import { VueFinalModal } from 'vue-final-modal'
 
 defineProps<{
-  title?: string;
-  content?: string;
-}>();
+  title?: string
+  content?: string
+}>()
 
 const emit = defineEmits<{
-  (e: "confirm"): void;
-  (e: "cancel"): void;
-}>();
+  (e: 'confirm'): void
+  (e: 'cancel'): void
+}>()
 </script>
 
 <template>
@@ -89,7 +89,7 @@ const emit = defineEmits<{
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
-  
+
   &:active {
     transform: scale(0.98);
   }
@@ -98,7 +98,7 @@ const emit = defineEmits<{
 .cancel-button {
   background-color: #f5f5f5;
   color: #666;
-  
+
   &:hover {
     background-color: #e8e8e8;
   }
@@ -107,7 +107,7 @@ const emit = defineEmits<{
 .confirm-button {
   background: linear-gradient(135deg, #7c4dff 0%, #9c27b0 100%);
   color: white;
-  
+
   &:hover {
     box-shadow: 0 2px 8px rgba(124, 77, 255, 0.3);
   }

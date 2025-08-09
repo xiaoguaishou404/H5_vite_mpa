@@ -6,11 +6,10 @@
       <div></div>
     </slot>
   </div>
- 
 </template>
 
 <style scoped>
-.h5-header{
+.h5-header {
   width: 100%;
   height: 100px;
   background-color: #fff;
@@ -18,13 +17,13 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  .header-left{
+  .header-left {
     width: 100px;
   }
-  .header-center{ 
+  .header-center {
     flex: 1;
   }
-  .header-right{
+  .header-right {
     width: 100px;
   }
 }

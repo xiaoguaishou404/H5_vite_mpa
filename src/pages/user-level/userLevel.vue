@@ -8,10 +8,7 @@
     />
 
     <div class="wealth_level_page_content">
-      <Header
-        class="header_container"
-        :class="{ 'has-shadow': showHeaderShadow }"
-      >
+      <Header class="header_container" :class="{ 'has-shadow': showHeaderShadow }">
         <template #header-left>
           <img src="@/assets/left-arrow.png" alt="返回" class="back-arrow" />
         </template>
@@ -30,11 +27,7 @@
         <!-- 用于 IntersectionObserver 监听的目标元素 -->
         <div class="observer-target" ref="observerTargetRef"></div>
         <div class="card_container">
-          <img
-            src="@/assets/user-level/user-level-card-bg.png"
-            alt=""
-            class="bg_img"
-          />
+          <img src="@/assets/user-level/user-level-card-bg.png" alt="" class="bg_img" />
           <!-- 容器区域 -->
           <div class="card_content_container">
             <!-- 文字 -->
@@ -45,11 +38,7 @@
         </div>
         <div class="level_progress_container">
           <!-- 背景图 -->
-          <img
-            src="@/assets/user-level/user-level-progress-bg.png"
-            alt=""
-            class="bg_img"
-          />
+          <img src="@/assets/user-level/user-level-progress-bg.png" alt="" class="bg_img" />
           <!-- 进度条区域 -->
           <div class="level_progress_content"></div>
         </div>
@@ -60,11 +49,7 @@
 
           <!-- 特权列表 -->
           <div class="level_introduction_content_list">
-            <div
-              class="level_introduction_content_list_item"
-              v-for="item in 6"
-              :key="item"
-            >
+            <div class="level_introduction_content_list_item" v-for="item in 6" :key="item">
               <div>LV6 等级特权</div>
               <!-- 礼品列表 -->
               <div class="level_introduction_content_list_item_gift_list">
@@ -83,19 +68,19 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from "vue";
-import { ModalsContainer, useModal } from "vue-final-modal";
-import Header from "@/shared/components/Header.vue";
+import { ref, onMounted, onUnmounted } from 'vue'
+import { ModalsContainer, useModal } from 'vue-final-modal'
+import Header from '@/shared/components/Header.vue'
 
 // 控制 header 阴影的响应式状态
-const showHeaderShadow = ref(false);
+const showHeaderShadow = ref(false)
 
 // DOM 引用
-const scrollContainerRef = ref(null);
-const observerTargetRef = ref(null);
+const scrollContainerRef = ref(null)
+const observerTargetRef = ref(null)
 
 // IntersectionObserver 实例
-let observer = null;
+let observer = null
 
 onMounted(() => {
   // 设置 IntersectionObserver 来监听滚动容器顶部的可见性
@@ -104,8 +89,8 @@ onMounted(() => {
       (entries) => {
         entries.forEach((entry) => {
           // 当目标元素不完全可见时，显示阴影
-          showHeaderShadow.value = !entry.isIntersecting;
-        });
+          showHeaderShadow.value = !entry.isIntersecting
+        })
       },
       {
         // 只有当目标完全可见时才触发
@@ -113,19 +98,19 @@ onMounted(() => {
         // 相对于viewport的根元素
         root: null,
         // 设置一个小的负margin，确保在滚动开始时就能检测到
-        rootMargin: "-1px 0px 0px 0px",
-      }
-    );
+        rootMargin: '-1px 0px 0px 0px',
+      },
+    )
 
-    observer.observe(observerTargetRef.value);
+    observer.observe(observerTargetRef.value)
   }
-});
+})
 
 onUnmounted(() => {
   if (observer) {
-    observer.disconnect();
+    observer.disconnect()
   }
-});
+})
 </script>
 
 <style scoped>
@@ -234,11 +219,7 @@ onUnmounted(() => {
                 width: 100%;
                 aspect-ratio: 1/1;
                 border-radius: 20px;
-                background: linear-gradient(
-                  180deg,
-                  #3f3325 0%,
-                  rgba(32, 25, 16, 0.0001) 100%
-                );
+                background: linear-gradient(180deg, #3f3325 0%, rgba(32, 25, 16, 0.0001) 100%);
               }
             }
           }

@@ -1,5 +1,5 @@
 <template>
-   <ModalsContainer />
+  <ModalsContainer />
   <div class="logout_account_page">
     <Header>
       <template #header-left>
@@ -26,9 +26,7 @@
 
           <div class="notice-item">
             <span class="notice-number">2、</span>
-            <span class="notice-text"
-              >申请注销后15天内不在用此账号登录，则注销成功</span
-            >
+            <span class="notice-text">申请注销后15天内不在用此账号登录，则注销成功</span>
           </div>
         </div>
       </div>
@@ -36,15 +34,9 @@
       <div class="bottom-container">
         <div class="agreement-section">
           <div class="checkbox-wrapper">
-            <input
-              type="checkbox"
-              id="agreement"
-              v-model="agreedToTerms"
-              class="checkbox"
-            />
+            <input type="checkbox" id="agreement" v-model="agreedToTerms" class="checkbox" />
             <label for="agreement" class="agreement-text">
-              本人已阅读并同意《<span class="agreement-link">账号注销协议</span
-              >》
+              本人已阅读并同意《<span class="agreement-link">账号注销协议</span>》
             </label>
           </div>
         </div>
@@ -65,49 +57,44 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import Header from "@/shared/components/Header.vue";
+import { ref } from 'vue'
+import Header from '@/shared/components/Header.vue'
 
-   import { ModalsContainer, useModal } from 'vue-final-modal'
-   import ModalConfirmPlainCss from '@/shared/components/ModalConfirmPlainCss.vue'
+import { ModalsContainer, useModal } from 'vue-final-modal'
+import ModalConfirmPlainCss from '@/shared/components/ModalConfirmPlainCss.vue'
 
-   const { open, close } = useModal({
-     component: ModalConfirmPlainCss,
-     attrs: {
-       title: '注销冷静期',
-       content: '您当前处于注销冷静期内X天X时X分X秒，登录后将撤销账号注销申请，确认登录吗？',
-       onConfirm() {
-         // 处理确认登录逻辑
-         console.log('确认登录，撤销注销申请');
-         close()
-       },
-       onCancel() {
-         // 处理取消逻辑
-         console.log('取消登录');
-         close()
-       },
-     },
-  
-   })
+const { open, close } = useModal({
+  component: ModalConfirmPlainCss,
+  attrs: {
+    title: '注销冷静期',
+    content: '您当前处于注销冷静期内X天X时X分X秒，登录后将撤销账号注销申请，确认登录吗？',
+    onConfirm() {
+      // 处理确认登录逻辑
+      console.log('确认登录，撤销注销申请')
+      close()
+    },
+    onCancel() {
+      // 处理取消逻辑
+      console.log('取消登录')
+      close()
+    },
+  },
+})
 
-
-
-const agreedToTerms = ref(false);
+const agreedToTerms = ref(false)
 
 const handleLogout = () => {
   if (agreedToTerms.value) {
     // 在实际应用中，这里会检查用户是否处于冷静期
     // 如果处于冷静期，则显示弹窗
     // 这里为了演示效果，直接显示弹窗
-    open();
-    
+    open()
+
     // 如果不在冷静期，直接处理注销逻辑
     // console.log("开始注销账号");
   }
-};
+}
 </script>
-
-
 
 <style scoped>
 .logout_account_page {
@@ -210,7 +197,7 @@ const handleLogout = () => {
     border-color: #7c4dff;
 
     &::after {
-      content: "✓";
+      content: '✓';
       position: absolute;
       top: 50%;
       left: 50%;
