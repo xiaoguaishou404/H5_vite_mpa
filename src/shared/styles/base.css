@@ -2,4 +2,6 @@
   --fontSize: 16px;
   --primary-bg-color: hsl(220 20 97 / 1);
   --px-10: 10px;
+  --border-radius: calc(infinity * 1px);
+
 }

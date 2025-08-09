@@ -33,7 +33,9 @@
             <!-- 文字 -->
             <div class="text_container">还需要1200点财富值升级</div>
             <!-- 进度条容器 -->
-            <div class="progress_container"></div>
+            <div class="progress_container">
+              <ProgressBar :value="65" custom-class="wealth-progress" />
+            </div>
           </div>
         </div>
         <div class="progress-container">
@@ -67,6 +69,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { ModalsContainer, useModal } from 'vue-final-modal'
 import Header from '@/shared/components/Header.vue'
+import ProgressBar from '@/shared/components/ProgressBar.vue'
 
 // 控制 header 阴影的响应式状态
 const showHeaderShadow = ref(false)
@@ -168,12 +171,44 @@ onUnmounted(() => {
         }
         .card-content {
           position: absolute;
-          top: 50%;
-          left: 33%;
-          transform: translate(-50%, -50%);
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+
           .text_container {
+            position: absolute;
+            top: 50%;
+            left: 33%;
+            transform: translate(-50%, -50%);
             white-space: nowrap;
             font-size: clamp(14px, 4vw, 20px);
+          }
+
+          .progress_container {
+            position: absolute;
+            top: 64%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            /* 自定义进度条样式 */
+            /* 推荐使用deep，因为使用全局style标签覆盖方案，样式是全局的，当权重比较高时可能会导致样式冲突 */
+            /* &:deep的颗粒度比较细致，基本上不会有问题，除非一个父级下使用了多次该组件，组件上需要注意使用custom-class来区分*/
+            /* 或者组件上再添加一个class xxx来区分，例如&:deep(.wealth-progress.xxx) */
+            &:deep(.wealth-progress) {
+              height: 20px;
+              background: rgb(44, 33, 22);
+
+              /* 通过外部CSS控制进度条颜色 */
+              .progress-fill {
+                background: linear-gradient(
+                  90deg,
+                  #fee1b8 0%,
+                  #fee4b3 50%,
+                  #fdc97c 100%
+                ) !important;
+              }
+            }
           }
         }
       }
