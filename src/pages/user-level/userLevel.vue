@@ -13,13 +13,10 @@
           <img src="@/assets/left-arrow.png" alt="返回" class="back-arrow" />
         </template>
         <template #header-center>
-          <div class="header_title">
+          <div class="header_title gradient-text" style="--g1: #ffffff; --g2: #cca48d">
             <div>财富等级</div>
             <div>魅力等级</div>
           </div>
-        </template>
-        <template #header-right>
-          <img src="@/assets/left-arrow.png" alt="返回" class="back-arrow" />
         </template>
       </Header>
 
@@ -157,7 +154,7 @@ onUnmounted(() => {
       flex-grow: 1;
       overflow: auto;
       position: relative;
-      padding: 0 20px;
+      padding: 20px;
 
       .observer-target {
         height: 0px;
@@ -223,11 +220,7 @@ onUnmounted(() => {
         border: 2px solid #2a231a;
         padding: 20px;
         border-radius: 20px;
-        background: linear-gradient(
-          179.94deg,
-          rgba(88, 55, 38, 0.0001) -0.56%,
-          rgba(71, 55, 40, 0.597957) 98.43%
-        );
+        background: linear-gradient(180deg, rgba(88, 55, 38, 0) 0%, rgba(71, 55, 40, 0.6) 100%);
         .intro-title {
           font-size: clamp(20px, 4vw, 24px);
           text-align: center;
@@ -248,7 +241,7 @@ onUnmounted(() => {
                 width: 100%;
                 aspect-ratio: 1/1;
                 border-radius: 20px;
-                background: linear-gradient(180deg, #3f3325 0%, rgba(32, 25, 16, 0.0001) 100%);
+                background: linear-gradient(180deg, #3f3325 0%, rgba(88, 55, 38, 0) 100%);
               }
             }
           }
