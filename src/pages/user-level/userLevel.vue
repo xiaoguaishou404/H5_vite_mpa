@@ -39,7 +39,26 @@
           <!-- 背景图 -->
           <img src="@/assets/user-level/user-level-progress-bg.png" alt="" class="bg_img" />
           <!-- 进度条区域 -->
-          <div class="progress-content"></div>
+          <div class="progress-content">
+            <div class="lv-last">
+              <div class="icon">
+                <img src="@/assets/user-level/lock-closed.png" alt="" />
+              </div>
+              LV50
+            </div>
+            <div class="lv-current">
+              <div class="icon">
+                <div class="current-icon"></div>
+              </div>
+              LV2
+            </div>
+            <div class="lv-next">
+              <div class="icon">
+                <img src="@/assets/user-level/lock-closed.png" alt="" />
+              </div>
+              LV3
+            </div>
+          </div>
         </div>
         <div class="level-intro">
           <div class="intro-title">
@@ -49,7 +68,10 @@
           <!-- 特权列表 -->
           <div class="intro-list">
             <div class="intro-item" v-for="item in 6" :key="item">
-              <div>LV6 等级特权</div>
+              <div class="intro-item-title">
+                <img src="@/assets/user-level/lock-open.png" alt="" />
+                LV6 等级特权
+              </div>
               <!-- 礼品列表 -->
               <div class="gift-list">
                 <div class="gift-item" v-for="gift in 3" :key="gift"></div>
@@ -175,18 +197,16 @@ onUnmounted(() => {
 
           .text_container {
             position: absolute;
-            top: 50%;
-            left: 33%;
-            transform: translate(-50%, -50%);
+            top: 44%;
+            left: 9%;
             white-space: nowrap;
-            font-size: clamp(14px, 4vw, 20px);
+            font-size: clamp(10px, 4vw, 20px);
           }
 
           .progress_container {
             position: absolute;
-            top: 64%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            top: 60%;
+            left: 9%;
             width: 80%;
             /* 自定义进度条样式 */
             /* 推荐使用deep，因为使用全局style标签覆盖方案，样式是全局的，当权重比较高时可能会导致样式冲突 */
@@ -212,8 +232,47 @@ onUnmounted(() => {
 
       .progress-container {
         position: relative;
+        margin-bottom: 40px;
         .bg_img {
           width: 100%;
+        }
+        .progress-content {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+          .lv-last,
+          .lv-current,
+          .lv-next {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            font-size: clamp(10px, 3vw, 14px);
+          }
+          .lv-current {
+            transform: translateY(1.5lh);
+          }
+          .icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #40362f;
+            padding: 6px;
+            img {
+              width: 100%;
+            }
+            .current-icon {
+              width: 100%;
+              height: 100%;
+              background-color: #c3aa9f;
+              border-radius: 50%;
+            }
+          }
         }
       }
       .level-intro {
@@ -224,6 +283,7 @@ onUnmounted(() => {
         .intro-title {
           font-size: clamp(20px, 4vw, 24px);
           text-align: center;
+          padding: 20px 0;
         }
         .intro-list {
           display: flex;
@@ -233,6 +293,15 @@ onUnmounted(() => {
             display: flex;
             flex-direction: column;
             gap: 10px;
+            .intro-item-title {
+              display: flex;
+              align-items: center;
+              gap: 10px;
+              img {
+                width: 20px;
+                height: 20px;
+              }
+            }
             .gift-list {
               display: grid;
               grid-template-columns: repeat(3, 1fr);
