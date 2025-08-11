@@ -67,9 +67,13 @@
 
           <!-- 特权列表 -->
           <div class="intro-list">
-            <div class="intro-item" v-for="item in 6" :key="item">
-              <div class="intro-item-title">
+            <div class="intro-item" v-for="(item, index) in 6" :key="item">
+              <div v-if="index < 2" class="intro-item-title lock-open">
                 <img src="@/assets/user-level/lock-open.png" alt="" />
+                LV6 等级特权
+              </div>
+              <div v-else class="intro-item-title lock-closed">
+                <img src="@/assets/user-level/lock-closed.png" alt="" />
                 LV6 等级特权
               </div>
               <!-- 礼品列表 -->
@@ -135,7 +139,6 @@ onUnmounted(() => {
 .user_level_page {
   height: 100%;
   position: relative;
-  color: #fff;
 
   .light-effect-overlay-img {
     position: absolute;
@@ -201,6 +204,7 @@ onUnmounted(() => {
             left: 9%;
             white-space: nowrap;
             font-size: clamp(10px, 4vw, 20px);
+            color: var(--primary-color);
           }
 
           .progress_container {
@@ -300,6 +304,12 @@ onUnmounted(() => {
               img {
                 width: 20px;
                 height: 20px;
+              }
+              &.lock-open {
+                color: var(--primary-color);
+              }
+              &.lock-closed {
+                color: var(--lock-closed-color);
               }
             }
             .gift-list {
