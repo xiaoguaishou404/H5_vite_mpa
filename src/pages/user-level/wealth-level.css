@@ -1,0 +1,119 @@
+#app {
+  width: clamp(300px, 100%, 800px);
+  height: 100vh;
+  margin: 0 auto;
+  background-color: var(--primary-bg-color);
+}
+
+:root[level='wealth-level-1'] {
+  --primary-color: hsl(22 23 65 / 1);
+  --primary-bg-color: hsl(33 24 7 / 1);
+  --level-intro-bg: linear-gradient(180deg, #17130d 0%, #32271c 100%);
+  --gradient-bg: linear-gradient(180deg, #3f3325 0%, #201910 100%);
+  --box-border-color: hsl(22 23 20 / 1);
+  --icon-bg-color: hsl(from #3f3325 h s calc(l + 5) / 1);
+  --icon-color: #d8c8aa;
+
+
+
+  
+  .wealth-progress{
+    .progress-fill{
+      --progress-fill-color: linear-gradient(
+        90deg,
+        #fedfb6 0%,
+        #fff4d4 50%,
+        #fdcb80 100%
+      );
+    }
+  }
+}
+
+:root[level='wealth-level-2'] {
+  --primary-color: hsl(22 23 65 / 1);
+  --primary-bg-color: hsl(11 31 7 / 1);
+  --level-intro-bg: linear-gradient(180deg, #150e0c 0%, #2f1b1a 100%);
+  --gradient-bg: linear-gradient(180deg, #3f2525 0%, #201910 100%);
+  --box-border-color: hsl(22 23 20 / 1);
+  --icon-bg-color: hsl(from #3f2525 h s calc(l + 5) / 1);
+  --icon-color: #d6acaa;
+
+
+  
+  .wealth-progress{
+    .progress-fill{
+      --progress-fill-color: linear-gradient(
+        90deg,
+        #fec9b6 0%,
+        #ffe4df 50%,
+        #ffcfbe 100%
+      );
+    }
+  }
+}
+
+:root[level='wealth-level-3'] {
+  --primary-color: hsl(234 23 65 / 1);
+  --primary-bg-color: hsl(228 27 7 / 1);
+  --level-intro-bg: linear-gradient(180deg, #0c0e15 0%, #1a1f2e 100%);
+  --gradient-bg: linear-gradient(180deg, #26253f 0%, #101620 100%);
+  --box-border-color:hsl(234 23 20 / 1);
+  --icon-bg-color: hsl(from #26253f h s calc(l + 5) / 1);
+  --icon-color: #adb6d4;
+
+  
+  .wealth-progress{
+    .progress-fill{
+      --progress-fill-color: linear-gradient(
+        90deg,
+        #b6cafe 0%,
+        #dfe9fe 50%,
+        #b6cafe 100%
+      );
+    }
+  }
+}
+
+:root[level='wealth-level-4'] {
+  --primary-color: hsl(211 23 65 / 1);
+  --primary-bg-color: hsl(90 6 7 / 1);
+  --level-intro-bg: linear-gradient(180deg, #0b1013 0%, #1c272f 100%);
+  --gradient-bg: linear-gradient(180deg, #25313f 0%, #101620 100%);
+  --box-border-color:hsl(211 23 20 / 1);
+  --icon-bg-color: hsl(from #25313f h s calc(l + 5) / 1);
+  --icon-color: #abcfd6;
+
+  
+  .wealth-progress{
+    .progress-fill{
+      --progress-fill-color: linear-gradient(
+        90deg,
+        #b6e3fe 0%,
+        #daebfe 50%,
+        #bee2fe 100%
+      );
+    }
+  }
+}
+
+:root[level='wealth-level-5'] {
+  --primary-color: hsl(29 23 65 / 1);
+  --primary-bg-color: hsl(205 21 6 / 1);
+  --level-intro-bg: linear-gradient(180deg, #12110f 0%, #372f2a 100%);
+  --gradient-bg: linear-gradient(180deg, #362b20 0%, #1d1917 100%);
+  --box-border-color:hsl(29 23 20 / 1);
+  --icon-bg-color: hsl(from #362b20 h s calc(l + 5) / 1);
+  --icon-color: #dacaac;
+
+  
+  .wealth-progress{
+    .progress-fill{
+      --progress-fill-color: linear-gradient(
+        90deg,
+        #86755e 0%,
+        #fdedde 50%,
+        #86755e 100%
+      );
+    }
+  }
+}

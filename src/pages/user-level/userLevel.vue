@@ -1,13 +1,25 @@
 <template>
   <Teleport v-if="headerContainerSelector" :to="headerContainerSelector">
-    <Header class="header_container" :class="{ 'has-shadow': showHeaderShadow }">
+    <Header class="header-container" :class="{ 'has-shadow': showHeaderShadow }">
       <template #header-left>
         <img src="@/assets/left-arrow.png" alt="返回" class="back-arrow" />
       </template>
       <template #header-center>
-        <div class="header_title gradient-text" style="--g1: #ffffff; --g2: #cca48d">
-          <div @click="changePage('wealthLevel')">财富等级</div>
-          <div @click="changePage('charmLevel')">魅力等级</div>
+        <div class="header-title">
+          <div
+            class="wealthLevel-text"
+            :class="{ active: currentPage === 'wealthLevel' }"
+            @click="changePage('wealthLevel')"
+          >
+            财富等级
+          </div>
+          <div
+            class="charmLevel-text"
+            :class="{ active: currentPage === 'charmLevel' }"
+            @click="changePage('charmLevel')"
+          >
+            魅力等级
+          </div>
         </div>
       </template>
     </Header>
@@ -28,7 +40,8 @@
 import wealthLevel from './wealthLevel.vue'
 import charmLevel from './charmLevel.vue'
 import Header from '@/shared/components/Header.vue'
-import { ref } from 'vue'
+import { ref, nextTick } from 'vue'
+
 // 控制 header 阴影的响应式状态
 const showHeaderShadow = ref(false)
 
@@ -40,12 +53,15 @@ function changePage(page) {
 }
 
 function editHeaderContainerSelector(selector) {
-  headerContainerSelector.value = selector
+  headerContainerSelector.value = ''
+  nextTick(() => {
+    headerContainerSelector.value = selector
+  })
 }
 </script>
 
 <style scoped>
-.header_container {
+.header-container {
   flex-shrink: 0;
   align-items: flex-end;
   background-color: transparent;
@@ -59,11 +75,28 @@ function editHeaderContainerSelector(selector) {
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5);
   }
 
-  .header_title {
+  .header-title {
     display: flex;
     align-items: center;
     gap: 80px;
-    font-size: clamp(20px, 4vw, 24px);
+    font-size: clamp(16px, 4vw, 24px);
+
+    .wealthLevel-text {
+      color: hsl(from var(--primary-color) h s calc(l + 30) / 1);
+      &.active {
+        font-weight: 600;
+        text-shadow: 0 0 25px hsl(from currentColor h s calc(l - 90) / 0.9);
+        color: hsl(from var(--primary-color) h s calc(l + 35) / 1);
+      }
+    }
+    .charmLevel-text {
+      color: hsl(from var(--primary-color) h s calc(l + 20) / 1);
+      &.active {
+        font-weight: 600;
+        text-shadow: 0 0 40px hsl(from currentColor h s calc(l + 100) / 0.8);
+        color: hsl(from var(--primary-color) h s l / 1);
+      }
+    }
   }
 }
 </style>

@@ -1,38 +1,40 @@
 <template>
   <ModalsContainer />
-  <div class="user_level_page">
-    <img
-      src="@/assets/user-level/light-effect-overlay.png"
-      alt=""
-      class="light-effect-overlay-img"
-    />
+  <div class="wealth-level-page">
+    <img :src="currentLevelData.lightEffectOverlayImg" alt="" class="light-effect-overlay-img" />
 
     <div class="page-content">
-      <div id="header_container_selector_wealthLevel"></div>
+      <div id="header-container-selector-wealthLevel"></div>
 
-      <div class="scroll_container" ref="scrollContainerRef">
+      <div class="scroll-container" ref="scrollContainerRef">
         <!-- 用于 IntersectionObserver 监听的目标元素 -->
         <div class="observer-target" ref="observerTargetRef"></div>
-        <div class="card_container">
-          <img src="@/assets/user-level/user-level-card-bg.png" alt="" class="bg_img" />
+        <div class="card-container">
+          <img :src="currentLevelData.cardBgImg" alt="" class="bg-img" />
           <!-- 容器区域 -->
           <div class="card-content">
             <!-- 文字 -->
-            <div class="text_container">还需要1200点财富值升级</div>
+            <div class="text-container">还需要1200点财富值升级</div>
             <!-- 进度条容器 -->
-            <div class="progress_container">
+            <div class="progress-container">
               <ProgressBar :value="65" custom-class="wealth-progress" />
+            </div>
+
+            <div class="level-info">
+              <div>LV1</div>
+              <div>1000/2000</div>
+              <div>LV2</div>
             </div>
           </div>
         </div>
         <div class="progress-container">
           <!-- 背景图 -->
-          <img src="@/assets/user-level/user-level-progress-bg.png" alt="" class="bg_img" />
+          <img :src="currentLevelData.progressBgImg" alt="" class="bg-img" />
           <!-- 进度条区域 -->
           <div class="progress-content">
             <div class="lv-last">
               <div class="icon">
-                <img src="@/assets/user-level/lock-closed.png" alt="" />
+                <img :src="currentLevelData.lockClosedImg" alt="" />
               </div>
               LV50
             </div>
@@ -44,7 +46,7 @@
             </div>
             <div class="lv-next">
               <div class="icon">
-                <img src="@/assets/user-level/lock-closed.png" alt="" />
+                <img :src="currentLevelData.lockClosedImg" alt="" />
               </div>
               LV3
             </div>
@@ -59,11 +61,11 @@
           <div class="intro-list">
             <div class="intro-item" v-for="(item, index) in 6" :key="item">
               <div v-if="index < 2" class="intro-item-title lock-open">
-                <img src="@/assets/user-level/lock-open.png" alt="" />
+                <img :src="currentLevelData.lockOpenImg" alt="" />
                 LV6 等级特权
               </div>
               <div v-else class="intro-item-title lock-closed">
-                <img src="@/assets/user-level/lock-closed.png" alt="" />
+                <img :src="currentLevelData.lockClosedImg" alt="" />
                 LV6 等级特权
               </div>
               <!-- 礼品列表 -->
@@ -79,14 +81,78 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, reactive, computed } from 'vue'
 import { ModalsContainer, useModal } from 'vue-final-modal'
 import Header from '@/shared/components/Header.vue'
 import ProgressBar from '@/shared/components/ProgressBar.vue'
-const emit = defineEmits(['editHeaderContainerSelector', 'showHeaderShadow']) 
+import './wealth-level.css'
 
+const emit = defineEmits(['editHeaderContainerSelector', 'showHeaderShadow'])
 
+const level = 5
+document.documentElement.setAttribute('level', `wealth-level-${level}`)
 
+// 全部等级数据字典
+const levelDataDict = [
+  {
+    level: 1,
+    title: 'LV1',
+    description: 'LV1 等级特权',
+    lightEffectOverlayImg: '/src/assets/user-level/wealth-level/level-1/light-effect-overlay.png',
+    cardBgImg: '/src/assets/user-level/wealth-level/level-1/card-bg.png',
+    progressBgImg: '/src/assets/user-level/wealth-level/level-1/progress-bg.png',
+    lockOpenImg: '/src/assets/user-level/wealth-level/level-1/lock-open.png',
+    lockClosedImg: '/src/assets/user-level/wealth-level/level-1/lock-closed.png',
+  },
+  {
+    level: 2,
+    title: 'LV2',
+    description: 'LV2 等级特权',
+    lightEffectOverlayImg: '/src/assets/user-level/wealth-level/level-2/light-effect-overlay.png',
+    cardBgImg: '/src/assets/user-level/wealth-level/level-2/card-bg.png',
+    progressBgImg: '/src/assets/user-level/wealth-level/level-2/progress-bg.png',
+    lockOpenImg: '/src/assets/user-level/wealth-level/level-2/lock-open.png',
+    lockClosedImg: '/src/assets/user-level/wealth-level/level-2/lock-closed.png',
+  },
+  {
+    level: 3,
+    title: 'LV3',
+    description: 'LV3 等级特权',
+    lightEffectOverlayImg: '/src/assets/user-level/wealth-level/level-3/light-effect-overlay.png',
+    cardBgImg: '/src/assets/user-level/wealth-level/level-3/card-bg.png',
+    progressBgImg: '/src/assets/user-level/wealth-level/level-3/progress-bg.png',
+    lockOpenImg: '/src/assets/user-level/wealth-level/level-3/lock-open.png',
+    lockClosedImg: '/src/assets/user-level/wealth-level/level-3/lock-closed.png',
+  },
+  {
+    level: 4,
+    title: 'LV4',
+    description: 'LV4 等级特权',
+    lightEffectOverlayImg: '/src/assets/user-level/wealth-level/level-4/light-effect-overlay.png',
+    cardBgImg: '/src/assets/user-level/wealth-level/level-4/card-bg.png',
+    progressBgImg: '/src/assets/user-level/wealth-level/level-4/progress-bg.png',
+    lockOpenImg: '/src/assets/user-level/wealth-level/level-4/lock-open.png',
+    lockClosedImg: '/src/assets/user-level/wealth-level/level-4/lock-closed.png',
+  },
+  {
+    level: 5,
+    title: 'LV5',
+    description: 'LV5 等级特权',
+    lightEffectOverlayImg: '/src/assets/user-level/wealth-level/level-5/light-effect-overlay.png',
+    cardBgImg: '/src/assets/user-level/wealth-level/level-5/card-bg.png',
+    progressBgImg: '/src/assets/user-level/wealth-level/level-5/progress-bg.png',
+    lockOpenImg: '/src/assets/user-level/wealth-level/level-5/lock-open.png',
+    lockClosedImg: '/src/assets/user-level/wealth-level/level-5/lock-closed.png',
+  },
+  {
+    level: 6,
+    title: 'LV6',
+  },
+]
+
+const currentLevelData = computed(() => {
+  return levelDataDict[level - 1]
+})
 
 // DOM 引用
 const scrollContainerRef = ref(null)
@@ -117,8 +183,7 @@ onMounted(() => {
 
     observer.observe(observerTargetRef.value)
   }
-  emit('editHeaderContainerSelector', '#header_container_selector_wealthLevel')
-  
+  emit('editHeaderContainerSelector', '#header-container-selector-wealthLevel')
 })
 
 onUnmounted(() => {
@@ -129,7 +194,7 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.user_level_page {
+.wealth-level-page {
   height: 100%;
   position: relative;
 
@@ -147,8 +212,7 @@ onUnmounted(() => {
     flex-direction: column;
     gap: 10px;
 
-   
-    .scroll_container {
+    .scroll-container {
       flex-grow: 1;
       overflow: auto;
       position: relative;
@@ -159,9 +223,9 @@ onUnmounted(() => {
         pointer-events: none;
       }
       /* 卡片模块后面应该使用zoom适配，但是这里没有使用 */
-      .card_container {
+      .card-container {
         position: relative;
-        .bg_img {
+        .bg-img {
           width: 100%;
         }
         .card-content {
@@ -171,7 +235,9 @@ onUnmounted(() => {
           width: 100%;
           height: 100%;
 
-          .text_container {
+          
+
+          .text-container {
             position: absolute;
             top: 44%;
             left: 9%;
@@ -180,7 +246,7 @@ onUnmounted(() => {
             color: var(--primary-color);
           }
 
-          .progress_container {
+          .progress-container {
             position: absolute;
             top: 60%;
             left: 9%;
@@ -190,19 +256,27 @@ onUnmounted(() => {
             /* &:deep的颗粒度比较细致，基本上不会有问题，除非一个父级下使用了多次该组件，组件上需要注意使用custom-class来区分*/
             /* 或者组件上再添加一个class xxx来区分，例如&:deep(.wealth-progress.xxx) */
             &:deep(.wealth-progress) {
-              height: 20px;
-              background: rgb(44, 33, 22);
+              height: clamp(10px, 3vw, 20px);
+              background: var(--icon-bg-color);
 
               /* 通过外部CSS控制进度条颜色 */
               .progress-fill {
-                background: linear-gradient(
-                  90deg,
-                  #fee1b8 0%,
-                  #fee4b3 50%,
-                  #fdc97c 100%
-                ) !important;
+                background: var(--progress-fill-color);
               }
             }
+          }
+
+          .level-info {
+            position: absolute;
+            top: 70%;
+            left: 9%;
+            width: 80%;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            gap: 10px;
+            font-size: clamp(10px, 3vw, 18px);
+            color: var(--primary-color);
           }
         }
       }
@@ -210,7 +284,7 @@ onUnmounted(() => {
       .progress-container {
         position: relative;
         margin-bottom: 40px;
-        .bg_img {
+        .bg-img {
           width: 100%;
         }
         .progress-content {
@@ -238,7 +312,7 @@ onUnmounted(() => {
             width: 30px;
             height: 30px;
             border-radius: 50%;
-            background-color: #40362f;
+            background-color: var(--icon-bg-color);
             padding: 6px;
             img {
               width: 100%;
@@ -246,17 +320,18 @@ onUnmounted(() => {
             .current-icon {
               width: 100%;
               height: 100%;
-              background-color: #c3aa9f;
+              background-color: var(--icon-color);
               border-radius: 50%;
             }
           }
         }
       }
       .level-intro {
-        border: 2px solid #2a231a;
+        border: 2px solid var(--box-border-color);
+
         padding: 20px;
         border-radius: 20px;
-        background: linear-gradient(180deg, rgba(88, 55, 38, 0) 0%, rgba(71, 55, 40, 0.6) 100%);
+        background: var(--level-intro-bg);
         .intro-title {
           font-size: clamp(20px, 4vw, 24px);
           text-align: center;
@@ -293,7 +368,7 @@ onUnmounted(() => {
                 width: 100%;
                 aspect-ratio: 1/1;
                 border-radius: 20px;
-                background: linear-gradient(180deg, #3f3325 0%, rgba(88, 55, 38, 0) 100%);
+                background: var(--gradient-bg);
               }
             }
           }

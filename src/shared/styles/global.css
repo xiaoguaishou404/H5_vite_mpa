@@ -24,7 +24,11 @@ a,
     background-color: hsl(from currentColor calc(h - 120) s l / 0.2);
   }
 }
-
+/* 渐变文本 */
+/* .userBox{
+  --g1: #ffffff;
+  --g2: #cca48d;
+} */
 .gradient-text {
   background: linear-gradient(to bottom, var(--g1, #ffffff), var(--g2, #cca48d));
   -webkit-background-clip: text;

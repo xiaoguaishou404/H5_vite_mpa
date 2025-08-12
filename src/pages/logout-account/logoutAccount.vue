@@ -1,6 +1,6 @@
 <template>
   <ModalsContainer />
-  <div class="logout_account_page">
+  <div class="logout-account-page">
     <Header>
       <template #header-left>
         <img src="@/assets/left-arrow.png" alt="返回" class="back-arrow" />
@@ -97,7 +97,7 @@ const handleLogout = () => {
 </script>
 
 <style scoped>
-.logout_account_page {
+.logout-account-page {
   display: flex;
   flex-direction: column;
   gap: 10px;

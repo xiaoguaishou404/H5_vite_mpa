@@ -1,0 +1,121 @@
+#app {
+  width: clamp(300px, 100%, 800px);
+  height: 100vh;
+  margin: 0 auto;
+  background-color: var(--primary-bg-color);
+}
+
+
+
+:root[level='charm-level-1'] {
+  --primary-color: hsl(231 21 35 / 1);
+  --primary-bg-color: hsl(220 69 94 / 1);
+  --level-intro-bg: transparent;
+  --gradient-bg: linear-gradient(180deg, #d5dbf0 0%, transparent 100%);
+  --box-border-color: transparent;
+  --icon-bg-color: hsl(from #d5dbf0 h s calc(l + 5) / 1);
+  --icon-color: #acb8f3;
+
+
+
+  
+  .charm-progress{
+    .progress-fill{
+      --progress-fill-color: linear-gradient(
+        90deg,
+        #f4f5fe 0%,
+        #ffffff 50%,
+        #f4f5fe 100%
+      );
+    }
+  }
+}
+
+:root[level='charm-level-2'] {
+  --primary-color: hsl(230 35 51 / 1);
+  --primary-bg-color: hsl(220 69 94 / 1);
+  --level-intro-bg: transparent;
+  --gradient-bg: linear-gradient(180deg, #a7beff 0%, transparent 100%);
+  --box-border-color: transparent;
+  --icon-bg-color: hsl(from #a7beff h s calc(l + 5) / 1);
+  --icon-color: #889aff;
+
+
+
+  
+  .charm-progress{
+    .progress-fill{
+      --progress-fill-color: linear-gradient(
+        90deg,
+        #a0abff 0%,
+        #ffffff 50%,
+        #a0abff 100%
+      );
+    }
+  }
+}
+
+:root[level='charm-level-3'] {
+  --primary-color: hsl(248 35 51 / 1);
+  --primary-bg-color: hsl(237 90 95 / 1);
+  --level-intro-bg: transparent;
+  --gradient-bg: linear-gradient(180deg, #a9a7ff 0%, transparent 100%);
+  --box-border-color: transparent;
+  --icon-bg-color: hsl(from #a9a7ff h s calc(l + 5) / 1);
+  --icon-color: #b8a1ff;
+  
+  .charm-progress{
+    .progress-fill{
+      --progress-fill-color: linear-gradient(
+        90deg,
+        #ada4ff 0%,
+        #ffffff 50%,
+        #ada4ff 100%
+      );
+    }
+  }
+}
+
+:root[level='charm-level-4'] {
+  --primary-color: hsl(316 35 51 / 1);
+  --primary-bg-color: hsl(320 100 98 / 1);
+  --level-intro-bg: transparent;
+  --gradient-bg: linear-gradient(180deg, #ffb6dc 0%, transparent 100%);
+  --box-border-color: transparent;
+  --icon-bg-color: hsl(from #ffb6dc h s calc(l + 5) / 1);
+  --icon-color: #feaef6;
+
+  
+  .charm-progress{
+    .progress-fill{
+      --progress-fill-color: linear-gradient(
+        90deg,
+        #fea2ee 0%,
+        #ffffff 50%,
+        #fea2ee 100%
+      );
+    }
+  }
+}
+
+:root[level='charm-level-5'] {
+  --primary-color: hsl(9 35 51 / 1);
+  --primary-bg-color: hsl(20 100 98 / 1);
+  --level-intro-bg: transparent;
+  --gradient-bg: linear-gradient(180deg, #ffd3bc 0%, transparent 100%);
+  --box-border-color: transparent;
+  --icon-bg-color: hsl(from #ffd3bc h s calc(l + 5) / 1);
+  --icon-color: #ffc5a9;
+
+  
+  .charm-progress{
+    .progress-fill{
+      --progress-fill-color: linear-gradient(
+        90deg,
+        #ffc49e 0%,
+        #ffffff 50%,
+        #ffc49e 100%
+      );
+    }
+  }
+}
