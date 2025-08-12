@@ -235,8 +235,6 @@ onUnmounted(() => {
           width: 100%;
           height: 100%;
 
-          
-
           .text-container {
             position: absolute;
             top: 44%;

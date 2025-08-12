@@ -5,8 +5,6 @@
   background-color: var(--primary-bg-color);
 }
 
-
-
 :root[level='charm-level-1'] {
   --primary-color: hsl(231 21 35 / 1);
   --primary-bg-color: hsl(220 69 94 / 1);
@@ -16,17 +14,9 @@
   --icon-bg-color: hsl(from #d5dbf0 h s calc(l + 5) / 1);
   --icon-color: #acb8f3;
 
-
-
-  
-  .charm-progress{
-    .progress-fill{
-      --progress-fill-color: linear-gradient(
-        90deg,
-        #f4f5fe 0%,
-        #ffffff 50%,
-        #f4f5fe 100%
-      );
+  .charm-progress {
+    .progress-fill {
+      --progress-fill-color: linear-gradient(90deg, #f4f5fe 0%, #ffffff 50%, #f4f5fe 100%);
     }
   }
 }
@@ -40,17 +30,9 @@
   --icon-bg-color: hsl(from #a7beff h s calc(l + 5) / 1);
   --icon-color: #889aff;
 
-
-
-  
-  .charm-progress{
-    .progress-fill{
-      --progress-fill-color: linear-gradient(
-        90deg,
-        #a0abff 0%,
-        #ffffff 50%,
-        #a0abff 100%
-      );
+  .charm-progress {
+    .progress-fill {
+      --progress-fill-color: linear-gradient(90deg, #a0abff 0%, #ffffff 50%, #a0abff 100%);
     }
   }
 }
@@ -63,15 +45,10 @@
   --box-border-color: transparent;
   --icon-bg-color: hsl(from #a9a7ff h s calc(l + 5) / 1);
   --icon-color: #b8a1ff;
-  
-  .charm-progress{
-    .progress-fill{
-      --progress-fill-color: linear-gradient(
-        90deg,
-        #ada4ff 0%,
-        #ffffff 50%,
-        #ada4ff 100%
-      );
+
+  .charm-progress {
+    .progress-fill {
+      --progress-fill-color: linear-gradient(90deg, #ada4ff 0%, #ffffff 50%, #ada4ff 100%);
     }
   }
 }
@@ -85,15 +62,9 @@
   --icon-bg-color: hsl(from #ffb6dc h s calc(l + 5) / 1);
   --icon-color: #feaef6;
 
-  
-  .charm-progress{
-    .progress-fill{
-      --progress-fill-color: linear-gradient(
-        90deg,
-        #fea2ee 0%,
-        #ffffff 50%,
-        #fea2ee 100%
-      );
+  .charm-progress {
+    .progress-fill {
+      --progress-fill-color: linear-gradient(90deg, #fea2ee 0%, #ffffff 50%, #fea2ee 100%);
     }
   }
 }
@@ -107,15 +78,9 @@
   --icon-bg-color: hsl(from #ffd3bc h s calc(l + 5) / 1);
   --icon-color: #ffc5a9;
 
-  
-  .charm-progress{
-    .progress-fill{
-      --progress-fill-color: linear-gradient(
-        90deg,
-        #ffc49e 0%,
-        #ffffff 50%,
-        #ffc49e 100%
-      );
+  .charm-progress {
+    .progress-fill {
+      --progress-fill-color: linear-gradient(90deg, #ffc49e 0%, #ffffff 50%, #ffc49e 100%);
     }
   }
 }

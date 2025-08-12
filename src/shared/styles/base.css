@@ -8,9 +8,5 @@
   --primary-color: hsl(22 23 65 / 1);
   --primary-bg-color: hsl(220 20 97 / 1);
   --lock-closed-color: hsl(from var(--primary-color) h s l / 0.6);
-  --gradient-bg: linear-gradient(180deg, #3F3325 0%, #201910 100%);
-
-
+  --gradient-bg: linear-gradient(180deg, #3f3325 0%, #201910 100%);
 }
-
-

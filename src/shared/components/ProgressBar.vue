@@ -1,6 +1,6 @@
 <template>
   <div class="progress-bar" :class="customClass">
-      <div class="progress-fill" :style="progressStyle"></div>
+    <div class="progress-fill" :style="progressStyle"></div>
   </div>
 </template>
 
