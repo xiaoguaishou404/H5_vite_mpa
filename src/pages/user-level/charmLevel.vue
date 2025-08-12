@@ -144,8 +144,28 @@ const levelDataDict = [
   },
 ]
 
+// 通过 Vite 的 import.meta.glob 收集静态资源，并在构建期生成可用 URL
+const charmImages = import.meta.glob('/src/assets/user-level/charm-level/**/*', {
+  eager: true,
+  import: 'default',
+})
+
+function resolveAssetUrl(path) {
+  if (!path) return path
+  return charmImages[path] || path
+}
+
+const resolvedLevelDataDict = levelDataDict.map((item) => ({
+  ...item,
+  lightEffectOverlayImg: resolveAssetUrl(item.lightEffectOverlayImg),
+  cardBgImg: resolveAssetUrl(item.cardBgImg),
+  progressBgImg: resolveAssetUrl(item.progressBgImg),
+  lockOpenImg: resolveAssetUrl(item.lockOpenImg),
+  lockClosedImg: resolveAssetUrl(item.lockClosedImg),
+}))
+
 const currentLevelData = computed(() => {
-  return levelDataDict[level - 1]
+  return resolvedLevelDataDict[level - 1]
 })
 
 // DOM 引用
