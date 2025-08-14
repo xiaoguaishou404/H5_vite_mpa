@@ -1,30 +1,31 @@
 <template>
   <div class="h5-header">
-    <slot name="header-left" class="header-left"></slot>
-    <slot name="header-center" class="header-center"></slot>
-    <slot name="header-right" class="header-right">
-      <div></div>
-    </slot>
+    <div class="safe-area-top"></div>
+    <div class="header-container">
+      <slot name="header-left"></slot>
+      <slot name="header-center"></slot>
+      <slot name="header-right"> </slot>
+    </div>
   </div>
 </template>
 
 <style scoped>
 .h5-header {
   width: 100%;
-  height: 100px;
-  background-color: #fff;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  .header-left {
-    width: 100px;
+  flex-direction: column;
+
+  .safe-area-top {
+    height: var(--safe-area-top, 20px);
   }
-  .header-center {
-    flex: 1;
-  }
-  .header-right {
-    width: 100px;
+
+  .header-container {
+    display: grid;
+    grid-template-columns: 30px 1fr 30px;
+    grid-template-rows: 50px;
+    align-items: center;
+    justify-items: center;
+    padding: 0px 10px;
   }
 }
 </style>

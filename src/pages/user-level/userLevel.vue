@@ -1,8 +1,8 @@
 <template>
   <Teleport v-if="headerContainerSelector" :to="headerContainerSelector">
-    <Header class="header-container" :class="{ 'has-shadow': showHeaderShadow }">
+    <Header class="header-user-level" :class="{ 'has-shadow': showHeaderShadow }">
       <template #header-left>
-        <img src="@/assets/left-arrow.png" alt="返回" class="back-arrow" />
+        <img @click="handleBack" src="@/assets/left-arrow-white.png" alt="返回" />
       </template>
       <template #header-center>
         <div class="header-title">
@@ -41,6 +41,22 @@ import wealthLevel from './wealthLevel.vue'
 import charmLevel from './charmLevel.vue'
 import Header from '@/shared/components/Header.vue'
 import { ref, nextTick } from 'vue'
+import { useWebviewCallerProvider } from '@/shared/utils/useWebviewCaller.js'
+
+import './user-level.css'
+
+// 初始化 webview 调用器
+
+const webviewCaller = useWebviewCallerProvider()
+
+const handleBack = async () => {
+  console.log('onClose')
+  try {
+    await webviewCaller('onClose')
+  } catch (error) {
+    console.error('返回操作失败:', error)
+  }
+}
 
 // 控制 header 阴影的响应式状态
 const showHeaderShadow = ref(false)
@@ -61,10 +77,7 @@ function editHeaderContainerSelector(selector) {
 </script>
 
 <style scoped>
-.header-container {
-  flex-shrink: 0;
-  align-items: flex-end;
-  background-color: transparent;
+.header-user-level {
   transition: box-shadow 0.3s ease;
 
   /* 默认状态：无阴影 */

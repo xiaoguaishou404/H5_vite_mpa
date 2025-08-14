@@ -1,14 +1,18 @@
 <template>
   <ModalsContainer />
   <div class="logout-account-page">
-    <Header>
+    <Header class="header-logout-account">
       <template #header-left>
-        <img src="@/assets/left-arrow.png" alt="返回" class="back-arrow" />
+        <img
+          @click="handleBack"
+          src="@/assets/left-arrow-black.png"
+          alt="返回"
+          class="back-arrow"
+        />
       </template>
       <template #header-center>
         <h1 class="header-title">注销账号</h1>
       </template>
-      <template #header-right></template>
     </Header>
 
     <div class="content">
@@ -59,9 +63,22 @@
 <script setup>
 import { ref } from 'vue'
 import Header from '@/shared/components/Header.vue'
+import { useWebviewCallerProvider } from '@/shared/utils/useWebviewCaller.js'
 
 import { ModalsContainer, useModal } from 'vue-final-modal'
 import ModalConfirmPlainCss from '@/shared/components/ModalConfirmPlainCss.vue'
+
+// 初始化 webview 调用器
+const webviewCaller = useWebviewCallerProvider()
+
+const handleBack = async () => {
+  console.log('onClose')
+  try {
+    await webviewCaller('onClose')
+  } catch (error) {
+    console.error('返回操作失败:', error)
+  }
+}
 
 const { open, close } = useModal({
   component: ModalConfirmPlainCss,
@@ -105,18 +122,15 @@ const handleLogout = () => {
   background-color: var(--primary-bg-color);
 }
 
-.back-arrow {
-  width: 24px;
-  height: 24px;
-  cursor: pointer;
-}
-
-.header-title {
-  font-size: 18px;
-  font-weight: 500;
-  margin: 0;
-  text-align: center;
-  color: #333;
+.header-logout-account {
+  background-color: #fff;
+  .header-title {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0;
+    text-align: center;
+    color: #333;
+  }
 }
 
 .content {
@@ -127,7 +141,10 @@ const handleLogout = () => {
 }
 .top-container {
   background-color: #fff;
-  padding: 0 20px;
+  padding: 20px;
+}
+.bottom-container {
+  padding: 50px 20px;
 }
 
 .apply-title {

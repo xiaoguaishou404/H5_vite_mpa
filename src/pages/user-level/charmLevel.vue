@@ -77,7 +77,6 @@
 <script setup>
 import { ref, onMounted, onUnmounted, reactive, computed } from 'vue'
 import { ModalsContainer, useModal } from 'vue-final-modal'
-import Header from '@/shared/components/Header.vue'
 import ProgressBar from '@/shared/components/ProgressBar.vue'
 import './charm-level.css'
 
