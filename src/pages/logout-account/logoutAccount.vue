@@ -63,18 +63,14 @@
 <script setup>
 import { ref } from 'vue'
 import Header from '@/shared/components/Header.vue'
-import { useWebviewCallerProvider } from '@/shared/utils/useWebviewCaller.js'
+import { webviewController } from '@/shared/utils/webviewController.js'
 
 import { ModalsContainer, useModal } from 'vue-final-modal'
 import ModalConfirmPlainCss from '@/shared/components/ModalConfirmPlainCss.vue'
 
-// 初始化 webview 调用器
-const webviewCaller = useWebviewCallerProvider()
-
 const handleBack = async () => {
-  console.log('onClose')
   try {
-    await webviewCaller('onClose')
+    await webviewController.webviewCaller('onClose')
   } catch (error) {
     console.error('返回操作失败:', error)
   }

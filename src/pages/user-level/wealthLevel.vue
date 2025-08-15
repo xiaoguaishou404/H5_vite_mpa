@@ -85,6 +85,13 @@ import { ref, onMounted, onUnmounted, reactive, computed } from 'vue'
 import { ModalsContainer, useModal } from 'vue-final-modal'
 import ProgressBar from '@/shared/components/ProgressBar.vue'
 import './wealth-level.css'
+import useFetch from '@/shared/utils/useFetch.js'
+
+useFetch(`/api/v1/user-exp/my/1`, {
+  method: 'POST',
+}).then((res) => {
+  console.log(res)
+})
 
 const emit = defineEmits(['editHeaderContainerSelector', 'showHeaderShadow'])
 
