@@ -56,6 +56,11 @@ const animateProgress = () => {
   const endValue = props.value
 
   const animate = () => {
+    // 如果已经被外部更新了，停止动画
+    if (isLoaded.value) {
+      return
+    }
+
     const elapsed = Date.now() - startTime
     const progress = Math.min(elapsed / duration, 1)
 
@@ -77,11 +82,15 @@ const animateProgress = () => {
 watch(
   () => props.value,
   (newValue) => {
+
     if (isLoaded.value) {
-      // 已加载完成，直接平滑过渡到新值
       currentProgress.value = newValue
+    } else {
+      currentProgress.value = newValue
+      isLoaded.value = true
     }
   },
+  { immediate: true },
 )
 
 onMounted(() => {

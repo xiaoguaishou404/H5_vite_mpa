@@ -11,7 +11,7 @@ const getHeaderAndBody = async (params) => {
   } else {
     return {
       headers: {
-        token: 'a8ac642418724f3dbf8ec25bdea11375#3',
+        token: 'e8e6e9253c614553b0020367b5fc594b#1017',
         timestamp: String(Date.now()),
         os: 'android',
         sign: 'fsdf35fasdfsa5432f',
@@ -27,7 +27,7 @@ const getHeaderAndBody = async (params) => {
 const useFetch = async (path, { method, headers, body }) => {
   const headerAndBody = await getHeaderAndBody(body)
 
-  return await fetch(`${baseUrl}${path}`, {
+  const res = await fetch(`${baseUrl}${path}`, {
     method,
     headers: {
       ...headerAndBody.headers,
@@ -35,6 +35,7 @@ const useFetch = async (path, { method, headers, body }) => {
     },
     body: JSON.stringify(headerAndBody.params),
   })
+  return res.json()
 }
 
 export default useFetch

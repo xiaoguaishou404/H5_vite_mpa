@@ -14,41 +14,51 @@
           <!-- 容器区域 -->
           <div class="card-content">
             <!-- 文字 -->
-            <div class="text-container">还需要1200点财富值升级</div>
+            <div class="text-container">
+              还需要
+              <div class="difference-level-exp">
+                {{ wealthData.differenceLevelExp }}
+              </div>
+              点财富值升级
+            </div>
             <!-- 进度条容器 -->
             <div class="progress-container">
-              <ProgressBar :value="65" custom-class="wealth-progress" />
+              <ProgressBar :value="progressPercentage" custom-class="wealth-progress" />
             </div>
 
             <div class="level-info">
-              <div>LV1</div>
-              <div>1000/2000</div>
-              <div>LV2</div>
+              <div>LV{{ currentLevel }}</div>
+              <div>{{ wealthData.currentExp }}/{{ wealthData.nextLevelExp }}</div>
+              <div>LV{{ nextLevel }}</div>
             </div>
           </div>
         </div>
-        <div class="progress-container">
+        <div class="level-history-container">
           <!-- 背景图 -->
           <img :src="currentLevelData.progressBgImg" alt="" class="bg-img" />
           <!-- 进度条区域 -->
           <div class="progress-content">
             <div class="lv-last">
-              <div class="icon">
-                <img :src="currentLevelData.lockClosedImg" alt="" />
-              </div>
-              LV50
+              <template v-if="levelHistory.last !== 0">
+                <div class="icon">
+                  <img :src="currentLevelData.lockClosedImg" alt="" />
+                </div>
+                LV{{ levelHistory.last }}
+              </template>
             </div>
             <div class="lv-current">
               <div class="icon">
                 <div class="current-icon"></div>
               </div>
-              LV2
+              LV{{ levelHistory.current }}
             </div>
             <div class="lv-next">
-              <div class="icon">
-                <img :src="currentLevelData.lockClosedImg" alt="" />
-              </div>
-              LV3
+              <template v-if="levelHistory.next <= wealthData.maxLevel">
+                <div class="icon">
+                  <img :src="currentLevelData.lockClosedImg" alt="" />
+                </div>
+                LV{{ levelHistory.next }}
+              </template>
             </div>
           </div>
         </div>
@@ -59,18 +69,26 @@
 
           <!-- 特权列表 -->
           <div class="intro-list">
-            <div class="intro-item" v-for="(item, index) in 6" :key="item">
-              <div v-if="index < 2" class="intro-item-title lock-open">
-                <img :src="currentLevelData.lockOpenImg" alt="" />
-                LV6 等级特权
-              </div>
-              <div v-else class="intro-item-title lock-closed">
-                <img :src="currentLevelData.lockClosedImg" alt="" />
-                LV6 等级特权
+            <div
+              class="intro-item"
+              v-for="privilege in wealthData.privilegeList"
+              :key="privilege.unlockLevel"
+            >
+              <div class="intro-item-title" :class="privilege.unlock ? 'lock-open' : 'lock-closed'">
+                <img
+                  :src="
+                    privilege.unlock ? currentLevelData.lockOpenImg : currentLevelData.lockClosedImg
+                  "
+                  alt=""
+                />
+                LV{{ privilege.unlockLevel }} 等级特权
               </div>
               <!-- 礼品列表 -->
               <div class="gift-list">
-                <div class="gift-item" v-for="gift in 3" :key="gift"></div>
+                <div class="gift-item" v-for="item in privilege.privilegeList" :key="item.name">
+                  <img :src="item.icon" :alt="item.name" />
+                  <div>{{ item.name }}</div>
+                </div>
               </div>
             </div>
           </div>
@@ -81,29 +99,69 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, reactive, computed } from 'vue'
+import { ref, onMounted, onUnmounted, reactive, computed, watch } from 'vue'
 import { ModalsContainer, useModal } from 'vue-final-modal'
 import ProgressBar from '@/shared/components/ProgressBar.vue'
 import './wealth-level.css'
 import useFetch from '@/shared/utils/useFetch.js'
 
-useFetch(`/api/v1/user-exp/my/1`, {
-  method: 'POST',
-}).then((res) => {
-  console.log(res)
+// 响应式数据存储
+const wealthData = ref({
+  headUrl: '',
+  icon: '',
+  level: 1,
+  maxLevel: 80,
+  levelZero: true,
+  levelIconCheck: false,
+  currentExp: 0,
+  nextLevelExp: 0,
+  differenceLevelExp: 0,
+  privilegeList: [],
 })
+
+// 获取财富等级数据
+const fetchWealthData = async () => {
+  try {
+    const res = await useFetch(`/api/v1/user-exp/my/1`, {
+      method: 'POST',
+    })
+
+    if (res.code === 200) {
+      wealthData.value = res.data
+      console.log('财富等级数据:', wealthData.value)
+    }
+  } catch (error) {
+    console.error('获取财富等级数据失败:', error)
+  }
+}
+
+// 初始加载数据
+fetchWealthData()
 
 const emit = defineEmits(['editHeaderContainerSelector', 'showHeaderShadow'])
 
-const level = 5
-document.documentElement.setAttribute('level', `wealth-level-${level}`)
+// 根据等级范围计算CSS主题级别
+const getCssLevelRange = (level) => {
+  if (level >= 1 && level <= 10) return 1
+  if (level >= 11 && level <= 30) return 2
+  if (level >= 31 && level <= 50) return 3
+  if (level >= 51 && level <= 80) return 4
+  return 1 // 默认返回1
+}
+
+// 监听等级变化，更新CSS变量
+watch(
+  () => wealthData.value.level,
+  (newLevel) => {
+    const cssLevel = getCssLevelRange(newLevel)
+    document.documentElement.setAttribute('level', `wealth-level-${cssLevel}`)
+  },
+  { immediate: true },
+)
 
 // 全部等级数据字典
 const levelDataDict = [
   {
-    level: 1,
-    title: 'LV1',
-    description: 'LV1 等级特权',
     lightEffectOverlayImg: '/src/assets/user-level/wealth-level/level-1/light-effect-overlay.png',
     cardBgImg: '/src/assets/user-level/wealth-level/level-1/card-bg.png',
     progressBgImg: '/src/assets/user-level/wealth-level/level-1/progress-bg.png',
@@ -111,9 +169,6 @@ const levelDataDict = [
     lockClosedImg: '/src/assets/user-level/wealth-level/level-1/lock-closed.png',
   },
   {
-    level: 2,
-    title: 'LV2',
-    description: 'LV2 等级特权',
     lightEffectOverlayImg: '/src/assets/user-level/wealth-level/level-2/light-effect-overlay.png',
     cardBgImg: '/src/assets/user-level/wealth-level/level-2/card-bg.png',
     progressBgImg: '/src/assets/user-level/wealth-level/level-2/progress-bg.png',
@@ -121,9 +176,6 @@ const levelDataDict = [
     lockClosedImg: '/src/assets/user-level/wealth-level/level-2/lock-closed.png',
   },
   {
-    level: 3,
-    title: 'LV3',
-    description: 'LV3 等级特权',
     lightEffectOverlayImg: '/src/assets/user-level/wealth-level/level-3/light-effect-overlay.png',
     cardBgImg: '/src/assets/user-level/wealth-level/level-3/card-bg.png',
     progressBgImg: '/src/assets/user-level/wealth-level/level-3/progress-bg.png',
@@ -131,9 +183,6 @@ const levelDataDict = [
     lockClosedImg: '/src/assets/user-level/wealth-level/level-3/lock-closed.png',
   },
   {
-    level: 4,
-    title: 'LV4',
-    description: 'LV4 等级特权',
     lightEffectOverlayImg: '/src/assets/user-level/wealth-level/level-4/light-effect-overlay.png',
     cardBgImg: '/src/assets/user-level/wealth-level/level-4/card-bg.png',
     progressBgImg: '/src/assets/user-level/wealth-level/level-4/progress-bg.png',
@@ -141,18 +190,11 @@ const levelDataDict = [
     lockClosedImg: '/src/assets/user-level/wealth-level/level-4/lock-closed.png',
   },
   {
-    level: 5,
-    title: 'LV5',
-    description: 'LV5 等级特权',
     lightEffectOverlayImg: '/src/assets/user-level/wealth-level/level-5/light-effect-overlay.png',
     cardBgImg: '/src/assets/user-level/wealth-level/level-5/card-bg.png',
     progressBgImg: '/src/assets/user-level/wealth-level/level-5/progress-bg.png',
     lockOpenImg: '/src/assets/user-level/wealth-level/level-5/lock-open.png',
     lockClosedImg: '/src/assets/user-level/wealth-level/level-5/lock-closed.png',
-  },
-  {
-    level: 6,
-    title: 'LV6',
   },
 ]
 
@@ -177,7 +219,28 @@ const resolvedLevelDataDict = levelDataDict.map((item) => ({
 }))
 
 const currentLevelData = computed(() => {
-  return resolvedLevelDataDict[level - 1]
+  const cssLevel = getCssLevelRange(wealthData.value.level)
+  return resolvedLevelDataDict[cssLevel - 1]
+})
+
+// 计算进度条百分比
+const progressPercentage = computed(() => {
+  if (wealthData.value.nextLevelExp === 0) return 0
+  return Math.round((wealthData.value.currentExp / wealthData.value.nextLevelExp) * 100)
+})
+
+// 计算当前等级和下一等级
+const currentLevel = computed(() => wealthData.value.level)
+const nextLevel = computed(() => wealthData.value.level + 1)
+
+// 计算等级历史进度数据
+const levelHistory = computed(() => {
+  const current = wealthData.value.level
+  return {
+    last: current > 1 ? current - 1 : 0,
+    current: current,
+    next: current + 1,
+  }
 })
 
 // DOM 引用
@@ -243,6 +306,8 @@ onUnmounted(() => {
       overflow: auto;
       position: relative;
       padding: 20px;
+      display: flex;
+      flex-direction: column;
 
       .observer-target {
         height: 0px;
@@ -253,6 +318,7 @@ onUnmounted(() => {
         position: relative;
         .bg-img {
           width: 100%;
+          margin-bottom: -20px;
         }
         .card-content {
           position: absolute;
@@ -268,6 +334,12 @@ onUnmounted(() => {
             white-space: nowrap;
             font-size: clamp(10px, 4vw, 20px);
             color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            .difference-level-exp {
+              color: var(--icon-color);
+            }
           }
 
           .progress-container {
@@ -292,12 +364,12 @@ onUnmounted(() => {
 
           .level-info {
             position: absolute;
-            top: 70%;
+            top: 73%;
             left: 9%;
             width: 80%;
             display: flex;
             align-items: center;
-            justify-content: space-around;
+            justify-content: space-between;
             gap: 10px;
             font-size: clamp(10px, 3vw, 18px);
             color: var(--primary-color);
@@ -305,9 +377,13 @@ onUnmounted(() => {
         }
       }
 
-      .progress-container {
+      .level-history-container {
         position: relative;
         margin-bottom: 40px;
+        height: 50px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
         .bg-img {
           width: 100%;
         }
@@ -328,6 +404,7 @@ onUnmounted(() => {
             align-items: center;
             gap: 6px;
             font-size: clamp(10px, 3vw, 14px);
+            transform: translateY(0.5lh);
           }
           .lv-current {
             transform: translateY(1.5lh);
@@ -351,6 +428,8 @@ onUnmounted(() => {
         }
       }
       .level-intro {
+        flex-grow: 1;
+
         border: 2px solid var(--box-border-color);
 
         padding: 20px;
@@ -393,6 +472,17 @@ onUnmounted(() => {
                 aspect-ratio: 1/1;
                 border-radius: 20px;
                 background: var(--gradient-bg);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 5px;
+                font-size: clamp(10px, 3vw, 18px);
+                img {
+                  width: 60%;
+                  height: 60%;
+                  object-fit: cover;
+                }
               }
             }
           }
