@@ -35,6 +35,12 @@ a,
   -webkit-text-fill-color: transparent;
 }
 
+.gradient-text-right {
+  background: linear-gradient(to right, var(--r1, #fae6c2), var(--r2, #fff), var(--r3, #f5cb88));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .hidden {
   display: none;
 }

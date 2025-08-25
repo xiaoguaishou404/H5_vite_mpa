@@ -12,6 +12,11 @@
       --progress-fill-color: linear-gradient(90deg, #f4f5fe 0%, #ffffff 50%, #f4f5fe 100%);
     }
   }
+  .gradient-text-right {
+    --r1: #7a81b0;
+    --r2: #62789f;
+    --r3: #6079a2;
+  }
 }
 
 :root[level='charm-level-2'] {
@@ -27,6 +32,11 @@
     .progress-fill {
       --progress-fill-color: linear-gradient(90deg, #a0abff 0%, #ffffff 50%, #a0abff 100%);
     }
+  }
+  .gradient-text-right {
+    --r1: #6580e9;
+    --r2: #5585df;
+    --r3: #4e7fde;
   }
 }
 
@@ -44,6 +54,11 @@
       --progress-fill-color: linear-gradient(90deg, #ada4ff 0%, #ffffff 50%, #ada4ff 100%);
     }
   }
+  .gradient-text-right {
+    --r1: #7956d0;
+    --r2: #8958c1;
+    --r3: #7f59b5;
+  }
 }
 
 :root[level='charm-level-4'] {
@@ -60,6 +75,11 @@
       --progress-fill-color: linear-gradient(90deg, #fea2ee 0%, #ffffff 50%, #fea2ee 100%);
     }
   }
+  .gradient-text-right {
+    --r1: #f065a9;
+    --r2: #da4978;
+    --r3: #c94570;
+  }
 }
 
 :root[level='charm-level-5'] {
@@ -75,5 +95,10 @@
     .progress-fill {
       --progress-fill-color: linear-gradient(90deg, #ffc49e 0%, #ffffff 50%, #ffc49e 100%);
     }
+  }
+  .gradient-text-right {
+    --r1: #d99f5d;
+    --r2: #e17f55;
+    --r3: #d16951;
   }
 }

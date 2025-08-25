@@ -8,6 +8,7 @@
       swipe-to-close="down"
       content-transition="vfm-slide-down"
       overlay-transition="vfm-fade"
+      @closed="handleClose"
     >
       <div class="header-container">
         <div class="tab-container">
@@ -105,10 +106,21 @@
             <div class="user-details">
               <div class="user-name">{{ user.nickname }}</div>
               <div class="user-tags">
-                <span class="gender-tag"
-                  >{{ formatGender(user.gender) }} {{ user.nobleInfo?.level || 0 }}</span
+                <span class="gender-tag" v-if="shouldShowGenderIcon(user.gender)">
+                  <img
+                    class="gender-icon"
+                    :src="getGenderIcon(user.gender)"
+                    :alt="user.gender === 1 ? '男' : '女'"
+                  />
+                </span>
+                <span class="level-tag">
+                  <img
+                    class="lv-icon-img"
+                    src="@/assets/live-leaderboard/level-number-img.png"
+                    alt=""
+                  />
+                  Lv.{{ user.nobleInfo?.level || 0 }}</span
                 >
-                <span class="level-tag">Lv.{{ user.nobleInfo?.level || 0 }}</span>
               </div>
             </div>
           </div>
@@ -123,11 +135,22 @@
             <div class="user-details">
               <div class="user-name">{{ leaderboardData.myInfo.nickname }}</div>
               <div class="user-tags">
-                <span class="gender-tag"
-                  >{{ formatGender(leaderboardData.myInfo.gender) }}
-                  {{ leaderboardData.myInfo.nobleInfo?.level || 0 }}</span
+                <span class="gender-tag" v-if="shouldShowGenderIcon(leaderboardData.myInfo.gender)">
+                  <img
+                    class="gender-icon"
+                    :src="getGenderIcon(leaderboardData.myInfo.gender)"
+                    :alt="leaderboardData.myInfo.gender === 1 ? '男' : '女'"
+                  />
+                </span>
+                <span class="level-tag">
+                  <!-- 等级tag图标 -->
+                  <img
+                    class="lv-icon-img"
+                    src="@/assets/live-leaderboard/level-number-img.png"
+                    alt=""
+                  />
+                  Lv.{{ leaderboardData.myInfo.nobleInfo?.level || 0 }}</span
                 >
-                <span class="level-tag">Lv.{{ leaderboardData.myInfo.nobleInfo?.level || 0 }}</span>
               </div>
             </div>
           </div>
@@ -143,6 +166,7 @@ import { ModalsContainer, useModal, VueFinalModal } from 'vue-final-modal'
 import { ref, onMounted, watch, computed } from 'vue'
 import './live-leaderboard.css'
 import useFetch from '@/shared/utils/useFetch.js'
+import { webviewController } from '@/shared/utils/webviewController.js'
 
 const isModalOpen = ref(true)
 const activeTab = ref('contribution') // 'contribution' | 'charm'
@@ -159,10 +183,9 @@ const timeTypeMap = {
   month: 10,
 }
 
-const genderMap = {
-  1: '♂',
-  2: '♀',
-  0: '?',
+const genderIconMap = {
+  1: '/src/assets/live-leaderboard/boy-icon.png', // 男性
+  2: '/src/assets/live-leaderboard/grid-icon.png', // 女性
 }
 
 const rankingType = computed(() => {
@@ -218,9 +241,22 @@ const listUsers = computed(() => {
   return userList.filter((user) => user.rank > 3)
 })
 
-// 格式化性别显示
-const formatGender = (gender) => {
-  return genderMap[gender] || '?'
+// 获取性别图标
+const getGenderIcon = (gender) => {
+  return genderIconMap[gender] || null
+}
+
+// 检查是否显示性别图标
+const shouldShowGenderIcon = (gender) => {
+  return gender === 1 || gender === 2
+}
+
+const handleClose = async () => {
+  try {
+    await webviewController.webviewCaller('onClose')
+  } catch (error) {
+    console.error('返回操作失败:', error)
+  }
 }
 
 const liveLeaderboard = {
@@ -483,16 +519,26 @@ onMounted(() => {
             padding: 2px 8px;
             border-radius: 12px;
             font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            .lv-icon-img {
+              width: 16px;
+              height: 16px;
+            }
+            .gender-icon {
+              width: 16px;
+              height: 16px;
+            }
           }
 
           .gender-tag {
-            background: #36BCFF;
+            background: #36bcff;
             color: white;
           }
 
           .level-tag {
-            background: linear-gradient(90deg, #FFE538 8.22%, #FF6D00 100%);
-
+            background: linear-gradient(90deg, #ffe538 8.22%, #ff6d00 100%);
             color: white;
           }
         }

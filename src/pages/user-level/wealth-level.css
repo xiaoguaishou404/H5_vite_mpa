@@ -12,6 +12,11 @@
       --progress-fill-color: linear-gradient(90deg, #fedfb6 0%, #fff4d4 50%, #fdcb80 100%);
     }
   }
+  .gradient-text-right {
+    --r1: #fae6c2;
+    --r2: #fff;
+    --r3: #f5cb80;
+  }
 }
 
 :root[level='wealth-level-2'] {
@@ -27,6 +32,11 @@
     .progress-fill {
       --progress-fill-color: linear-gradient(90deg, #fec9b6 0%, #ffe4df 50%, #ffcfbe 100%);
     }
+  }
+  .gradient-text-right {
+    --r1: #ffccc9;
+    --r2: #fff;
+    --r3: #f7c0b9;
   }
 }
 
@@ -44,6 +54,11 @@
       --progress-fill-color: linear-gradient(90deg, #b6cafe 0%, #dfe9fe 50%, #b6cafe 100%);
     }
   }
+  .gradient-text-right {
+    --r1: #bcd3f6;
+    --r2: #fff;
+    --r3: #b9c5f8;
+  }
 }
 
 :root[level='wealth-level-4'] {
@@ -60,6 +75,11 @@
       --progress-fill-color: linear-gradient(90deg, #b6e3fe 0%, #daebfe 50%, #bee2fe 100%);
     }
   }
+  .gradient-text-right {
+    --r1: #c5f5ff;
+    --r2: #fff;
+    --r3: #b4ebf5;
+  }
 }
 
 :root[level='wealth-level-5'] {
@@ -75,5 +95,10 @@
     .progress-fill {
       --progress-fill-color: linear-gradient(90deg, #86755e 0%, #fdedde 50%, #86755e 100%);
     }
+  }
+  .gradient-text-right {
+    --r1: #f9f2e2;
+    --r2: #fff;
+    --r3: #b0a798;
   }
 }

@@ -11,7 +11,7 @@ const getHeaderAndBody = async (params) => {
   } else {
     return {
       headers: {
-        token: 'e8e6e9253c614553b0020367b5fc594b#1017',
+        token: '04c11b83173d48c0b3cc4048dc548541#1017',
         timestamp: String(Date.now()),
         os: 'android',
         sign: 'fsdf35fasdfsa5432f',

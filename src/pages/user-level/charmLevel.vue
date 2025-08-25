@@ -13,6 +13,7 @@
           <img :src="currentLevelData.cardBgImg" alt="" class="bg-img" />
           <!-- 容器区域 -->
           <div class="card-content">
+            <div class="level-title gradient-text-right">LV.{{ charmData.level }} {{ levelTitle }}</div>
             <!-- 文字 -->
             <div class="text-container">
               还需要
@@ -147,6 +148,21 @@ const getCssLevelRange = (level) => {
   if (level >= 51 && level <= 80) return 4
   return 1 // 默认返回1
 }
+
+// 等级标题字典
+const levelTitleMap = {
+  1: '白钻',
+  2: '蓝钻',
+  3: '紫钻',
+  4: '红钻',
+  5: '黄钻',
+}
+
+// 根据等级获取标题文字（计算属性）
+const levelTitle = computed(() => {
+  const cssLevel = getCssLevelRange(charmData.value.level)
+  return levelTitleMap[cssLevel] || '白钻'
+})
 
 // 监听等级变化，更新CSS变量
 watch(
@@ -325,6 +341,15 @@ onUnmounted(() => {
           top: 0;
           width: 100%;
           height: 100%;
+          .level-title {
+            position: absolute;
+            top: 25%;
+            left: 9%;
+            font-size: clamp(20px, 5vw, 30px);
+            font-weight: 600;
+            padding-right: 20px;
+            font-style: italic;
+          }
 
           .text-container {
             position: absolute;
