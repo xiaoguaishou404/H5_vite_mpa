@@ -14,4 +14,8 @@ export const entries = {
     input: resolve(rootDir, 'user-level.html'),
     name: 'user_level',
   },
+  'live-leaderboard': {
+    input: resolve(rootDir, 'live-leaderboard.html'),
+    name: 'live_leaderboard',
+  },
 }

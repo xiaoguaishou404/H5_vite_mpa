@@ -167,6 +167,8 @@ import { ref, onMounted, watch, computed } from 'vue'
 import './live-leaderboard.css'
 import useFetch from '@/shared/utils/useFetch.js'
 import { webviewController } from '@/shared/utils/webviewController.js'
+import contributionLeaderboardBg from '@/assets/live-leaderboard/contribution-leaderboard-bg.png'
+import charmLeaderboardBg from '@/assets/live-leaderboard/charm-leaderboard-bg.png'
 
 const isModalOpen = ref(true)
 const activeTab = ref('contribution') // 'contribution' | 'charm'
@@ -261,10 +263,10 @@ const handleClose = async () => {
 
 const liveLeaderboard = {
   contribution: {
-    bg: `url('/src/assets/live-leaderboard/contribution-leaderboard-bg.png')`,
+    bg: `url(${contributionLeaderboardBg})`,
   },
   charm: {
-    bg: `url('/src/assets/live-leaderboard/charm-leaderboard-bg.png')`,
+    bg: `url(${charmLeaderboardBg})`,
   },
 }
 
