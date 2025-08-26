@@ -13,7 +13,9 @@
           <img :src="currentLevelData.cardBgImg" alt="" class="bg-img" />
           <!-- 容器区域 -->
           <div class="card-content">
-            <div class="level-title gradient-text-right">LV.{{ wealthData.level }} {{ levelTitle }}</div>
+            <div class="level-title gradient-text-right">
+              LV.{{ wealthData.level }} {{ levelTitle }}
+            </div>
             <!-- 文字 -->
             <div class="text-container">
               还需要

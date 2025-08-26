@@ -45,7 +45,6 @@ import { webviewController } from '@/shared/utils/webviewController.js'
 
 import './user-level.css'
 
-
 const handleBack = async () => {
   try {
     await webviewController.webviewCaller('onClose')

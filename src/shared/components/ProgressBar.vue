@@ -82,7 +82,6 @@ const animateProgress = () => {
 watch(
   () => props.value,
   (newValue) => {
-
     if (isLoaded.value) {
       currentProgress.value = newValue
     } else {

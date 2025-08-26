@@ -9,18 +9,14 @@ body {
   --primary-bg-color: rgba(0, 0, 0, 0.2);
 }
 
-
 :root[type='contribution'] {
-  --time-selector-active-bg: linear-gradient(180deg, #5A2FFC -9.6%, #8963F1 100%);
-  --number-button-bg: linear-gradient(180deg, #5A2FFC -9.6%, #C979FF 100%);
+  --time-selector-active-bg: linear-gradient(180deg, #5a2ffc -9.6%, #8963f1 100%);
+  --number-button-bg: linear-gradient(180deg, #5a2ffc -9.6%, #c979ff 100%);
   --footer-container-bg: linear-gradient(360deg, #22174a 0%, #5a37d4 100%);
-
 }
 
 :root[type='charm'] {
-  --time-selector-active-bg: linear-gradient(180deg, #7ABAFF 0%, #B077FF 100%);
-  --number-button-bg: linear-gradient(180deg, #8D90FF 0%, #FF73FB 100%);
-  --footer-container-bg: linear-gradient(360deg, #3E5CF1 0%, #9C9BFF 100%);
-
-
+  --time-selector-active-bg: linear-gradient(180deg, #7abaff 0%, #b077ff 100%);
+  --number-button-bg: linear-gradient(180deg, #8d90ff 0%, #ff73fb 100%);
+  --footer-container-bg: linear-gradient(360deg, #3e5cf1 0%, #9c9bff 100%);
 }

@@ -8,5 +8,3 @@ export const webviewController = {
   isWebview: !!webviewCaller,
   webviewCaller: webviewCaller || notWebviewCaller,
 }
-
-
